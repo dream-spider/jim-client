@@ -23,7 +23,7 @@
   </div>
 </template>
 <script type="text/javascript">
-  import constants from '@business/home/constants'
+import constants from '@business/home/constants'
 const INDICATOR_INDURATION = 1000
 const TITLE_HEIGHT = 30
 
@@ -32,7 +32,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: function() {
+      default: function () {
         return []
       }
     },
@@ -41,7 +41,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       currentIndex: 0,
       moving: false,
@@ -50,7 +50,7 @@ export default {
     }
   },
   watch: {
-    currentIndex(newVal) {
+    currentIndex (newVal) {
       clearTimeout(this.timer)
       this.currentIndicator = this.indexList[this.currentIndex]
       this.moving = true
@@ -60,24 +60,24 @@ export default {
     }
   },
   computed: {
-    indexList() {
+    indexList () {
       return this.data.map(group => {
         return group.title.substring(0, 1)
       })
     }
   },
-  created() {
+  created () {
     this.listHeight = []
     this.timer = null
     this.scrollTimer = null
   },
-  mounted() {
+  mounted () {
     setTimeout(() => {
       this._calculateHeight()
     }, 20)
   },
   methods: {
-    _calculateHeight() {
+    _calculateHeight () {
       this.listHeight = []
       const list = this.$refs.indexGroup
       let height = 0
@@ -88,14 +88,14 @@ export default {
         this.listHeight.push(height)
       }
     },
-    _onTouchStartIndex(index) {
+    _onTouchStartIndex (index) {
       this.currentIndex = index
       this.$refs.indexWrap.scrollTop = this.listHeight[index]
     },
-    clickItem(item) {
+    clickItem (item) {
       this.$emit('choose', item)
     },
-    onListWrapScroll(e) {
+    onListWrapScroll (e) {
       clearTimeout(this.scrollTimer)
       this.scrollTimer = setTimeout(() => {
         let scrollTop = this.$refs.indexWrap.scrollTop
@@ -112,7 +112,7 @@ export default {
       }, 20)
     }
   },
-  destroyed() {
+  destroyed () {
     clearTimeout(this.timer)
     clearTimeout(this.scrollTimer)
   }
@@ -129,7 +129,7 @@ export default {
   .index-list-wrap {
     height: 100%;
     overflow: auto;
-	-webkit-overflow-scrolling: touch; //#issue-368550974
+	  -webkit-overflow-scrolling: touch; //#issue-368550974
   }
 
   .index-group {

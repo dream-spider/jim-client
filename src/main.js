@@ -10,9 +10,8 @@ import('@assets/css/layout.css')
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-Vue.filter('dateformat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+Vue.filter('dateformat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
   return moment(dataStr).format(pattern)
-
 })
 new Vue({
   router,

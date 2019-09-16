@@ -35,11 +35,13 @@ export default {
   },
   created () {
     this.queryCustomeServiceList()
+    console.log(1)
+    hello()
   },
   data () {
     return {
       tableData: null,
-      loading : false
+      loading: false
     }
   }
 }

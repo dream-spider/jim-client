@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     fetchHistoryMessage (pageNum) {
-      if(pageNum){
+      if (pageNum) {
         this.pageNum = pageNum
       }
       api.fetchOfflineMsg({

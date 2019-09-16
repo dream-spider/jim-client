@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import constants from '@business/home/constants'
+import constants from '@business/home/constants'
 export default {
   data: function () {
     return {

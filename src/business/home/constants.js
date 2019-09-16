@@ -19,7 +19,7 @@ const CONSTANTS = {
     SINGLE_CHAT: '10',
     GROUP_CHAT: '20'
   },
-  IM_MSG_TYPE:{
+  IM_MSG_TYPE: {
     PLAIN_TEXT: 'PLAIN_TEXT'
   },
   avatars: {

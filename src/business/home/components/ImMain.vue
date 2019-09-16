@@ -106,7 +106,7 @@ export default {
         return
       }
       let session = []
-      if(this.sessionData.length > 0){
+      if (this.sessionData.length > 0) {
         session = this.sessionData.filter((data) => {
           return data.users[0].userId === item.id
         })

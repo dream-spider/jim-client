@@ -75,7 +75,7 @@ export const makeTree = function (idKey, pIdKey, data) {
  * @author hujin
  */
 export const dateFormat = function (dateValue, fmt) {
-  if(typeof dateValue != 'number'){
+  if (typeof dateValue !== 'number') {
     dateValue = parseInt(dateValue)
   }
   const date = new Date(dateValue)
