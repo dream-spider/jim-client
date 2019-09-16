@@ -253,7 +253,7 @@ export default {
           break
         case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
           let data = msg.data
-          if (data.senderId == this.talkingFriend.userId) {
+          if (data.senderId === this.talkingFriend.userId) {
             // 信息发送人是当前聊天对象，则刷新聊天内容
             this.msgContent.push(data)
           }

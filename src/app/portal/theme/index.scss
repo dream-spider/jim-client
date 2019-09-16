@@ -1,3 +1,9 @@
-.full-height { 
+@import './common';
+@import './error';
+
+
+html, body{
+  margin: 0;
+  padding: 0;
   height: 100%;
 }

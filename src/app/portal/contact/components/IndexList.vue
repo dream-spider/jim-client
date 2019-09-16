@@ -119,7 +119,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .index-list {
   position: relative;
   width: 100%;
@@ -129,7 +129,7 @@ export default {
   .index-list-wrap {
     height: 100%;
     overflow: auto;
-	  -webkit-overflow-scrolling: touch; //#issue-368550974
+    -webkit-overflow-scrolling: touch; //#issue-368550974
   }
 
   .index-group {

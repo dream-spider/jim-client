@@ -19,7 +19,7 @@
 
 <script>
 import api from '@business/home/api'
-import { hello } from '@/app/isdk/index.ts'
+import { hello } from '@/isdk/index.ts'
 export default {
   name: 'index',
   methods: {
