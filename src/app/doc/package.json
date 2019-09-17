@@ -1,0 +1,17 @@
+{
+  "name": "jim-client-doc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev posts",
+    "build": "vuepress build posts"
+  },
+  "keywords": [],
+  "author": "Hao Peng <phshy0607@outlook.com>",
+  "license": "ISC",
+  "dependencies": {
+    "vuepress": "^1.1.0"
+  }
+}
