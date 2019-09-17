@@ -1,4 +1,4 @@
-import axios from '@common/plugins/Axios'
+import axios from 'axios'
 /**
  * 登录鉴权模块接口集合
  */

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import api from '@business/home/api'
+import api from '@/isdk/api'
 export default {
   name: 'index',
   methods: {

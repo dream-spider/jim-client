@@ -23,11 +23,10 @@
 </template>
 
 <script>
-import constants from '@business/home/constants'
 export default {
   data: function () {
     return {
-      avatars: constants.avatars
+      avatars: this.$constants.avatars
     }
   },
   props: {

@@ -35,9 +35,8 @@
   </div>
 </template>
 <script>
-import ChatPanel from '@business/home/components/ChatPanel'
-import ChatHistory from '@business/home/components/ChatHistory'
-import constants from '@business/home/constants'
+import ChatPanel from './ChatPanel'
+import ChatHistory from './ChatHistory'
 export default {
   name: 'JimMainPanel',
   components: {
@@ -65,7 +64,7 @@ export default {
     sendMsg (msg) {
       if (this.hotMsg) {
         let msg = {
-          actionType: constants.IM_ACTION_TYPE.SINGLE_CHAT,
+          actionType: this.$constants.IM_ACTION_TYPE.SINGLE_CHAT,
           chatMsg: {
             senderId: this.me.userId,
             senderName: this.me.userName,

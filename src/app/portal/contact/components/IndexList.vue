@@ -23,7 +23,6 @@
   </div>
 </template>
 <script type="text/javascript">
-import constants from '@business/home/constants'
 const INDICATOR_INDURATION = 1000
 const TITLE_HEIGHT = 30
 
@@ -46,7 +45,7 @@ export default {
       currentIndex: 0,
       moving: false,
       currentIndicator: '',
-      avatars: constants.avatars
+      avatars: this.$constants.avatars
     }
   },
   watch: {

@@ -33,15 +33,14 @@
 </template>
 
 <script>
-import constants from '@business/home/constants'
-import api from '@business/home/api'
+import api from '@/isdk/api'
 export default {
   name: 'SessionPanel',
   data () {
     return {
       sessionDataLoading: false,
       sessionKeyword: '',
-      avatars: constants.avatars
+      avatars: this.$constants.avatars
     }
   },
   props: {
@@ -76,7 +75,7 @@ export default {
         sessionData.chatMsg.msg = val.msg
         sessionData.chatMsg.sendTime = val.sendTime
         sessionData.chatMsg.sessionId = val.sessionId
-        this.$set(sessionData, 'isNew', (sessionData.session.sessionId != this.activeSession))
+        this.$set(sessionData, 'isNew', (sessionData.session.sessionId !== this.activeSession))
         // 变动的会话置顶
         if (activeSessionIndex > 0) {
           this.sessionList.unshift(this.sessionList.splice(activeSessionIndex, 1)[0])

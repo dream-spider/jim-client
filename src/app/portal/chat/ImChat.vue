@@ -4,7 +4,6 @@
       <el-col :span="2">
         <div class="sideBar">
           <el-avatar shape="square" :size="50" fit="fill" :src="avatars[userInfo.avatar]"></el-avatar>
-          </br>
           <el-link type="info">{{userInfo.userName}}</el-link>
           <el-menu default-active="1" mode="vertical" background-color="#483348" @select="handleMenuSelect">
             <el-menu-item index="1">
@@ -38,12 +37,11 @@
 </template>
 
 <script>
-import api from '@business/home/api'
+import api from '@/isdk/api'
 import { Notification, Loading } from 'element-ui'
-import constants from '@business/home/constants'
 import ContactList from '@/app/portal/contact/ImContact'
-import JimMainPanel from '@business/home/components/JimMainPanel'
-import SessionPanel from '@business/home/components/SessionPanel'
+import JimMainPanel from './components/JimMainPanel'
+import SessionPanel from './components/SessionPanel'
 export default {
   components: {
     'contact-list': ContactList,
@@ -72,7 +70,7 @@ export default {
         total: 0,
         pageNum: 0
       },
-      avatars: constants.avatars
+      avatars: this.$constants.avatars
     }
   },
   mounted () {
@@ -120,7 +118,7 @@ export default {
         const res = await api.createSession({
           createBy: this.userInfo.userId,
           friendId: item.id,
-          sessionType: constants.IM_SESSION_TYPE.SINGLE_CHAT
+          sessionType: this.$constants.IM_SESSION_TYPE.SINGLE_CHAT
         })
         if (!res.data) {
           return false
@@ -187,7 +185,7 @@ export default {
     sendHeartBeat () {
       // 定时发送心跳
       let heartBeatMsg = {
-        actionType: constants.IM_ACTION_TYPE.HEART_BEAT,
+        actionType: this.$constants.IM_ACTION_TYPE.HEART_BEAT,
         chatMsg: {
           senderId: this.userInfo.userId, senderName: this.userInfo.userName
         }
@@ -214,7 +212,7 @@ export default {
       console.log('连接成功')
       this.isConnect = true
       let loginMsg = {
-        actionType: constants.IM_ACTION_TYPE.ONLINE,
+        actionType: this.$constants.IM_ACTION_TYPE.ONLINE,
         chatMsg: {
           senderId: this.userInfo.userId, senderName: this.userInfo.userName
         }
@@ -239,7 +237,7 @@ export default {
          *
          */
       switch (msg.code) {
-        case constants.IM_MSG_ACTION_TYPE.CONNECTION_ESTABLISH:
+        case this.$constants.IM_MSG_ACTION_TYPE.CONNECTION_ESTABLISH:
           if (msg.data.length > 0) {
             this.sessionData = msg.data
           }
@@ -248,10 +246,10 @@ export default {
              */
           setInterval(this.sendHeartBeat, 18000)
           break
-        case constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
+        case this.$constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
           console.log(msg.message)
           break
-        case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
+        case this.$constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
           let data = msg.data
           if (data.senderId === this.talkingFriend.userId) {
             // 信息发送人是当前聊天对象，则刷新聊天内容

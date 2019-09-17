@@ -1,10 +1,10 @@
-import api from '@common/api/index'
-import constants from '@common/constants'
-import { toSSO } from '@common/util'
+import auth from '@/isdk/auth'
+import constants from '@/isdk/constants'
+import { toSSO } from '@/common/util'
 
 export default {
   async initJwtToken ({ commit, dispatch, state }, { code }) {
-    const tokenRes = await api.auth.getJwtToken(code)
+    const tokenRes = await auth.getJwtToken(code)
     if (tokenRes === undefined) {
       dispatch('logout')
     }
@@ -15,7 +15,7 @@ export default {
     let { jwtToken, accessToken } = tokenData
     commit('setToken', { token: jwtToken })
     commit('setAccessToken', { accessToken: accessToken })
-    const principalRes = await api.auth.getUser()
+    const principalRes = await auth.getUser()
     return principalRes
   },
   setPrincipal ({ commit }, principalData) {

@@ -6,7 +6,7 @@
 
 <script>
 import IndexList from './components/IndexList'
-import api from '@business/home/api'
+import api from '@/isdk/api'
 export default {
   name: 'ImContact',
   model: {

@@ -1,4 +1,4 @@
-import Constants from '@common/constants'
+import Constants from '@/isdk/constants'
 import { lsInstance } from '@common/util'
 export default {
   setToken (state, payload) {

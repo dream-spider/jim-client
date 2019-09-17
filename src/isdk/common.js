@@ -1,4 +1,4 @@
-import axios from '@common/plugins/Axios'
+import axios from 'axios'
 import { Message } from 'element-ui'
 
 /**

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import ChatPanel from '@business/home/components/ChatPanel'
-import api from '@business/home/api'
+import ChatPanel from './ChatPanel'
+import api from '@/isdk/api'
 export default {
   name: 'ChatHistory',
   components: {

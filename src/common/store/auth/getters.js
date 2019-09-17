@@ -1,4 +1,4 @@
-import constants from '@common/constants'
+import constants from '@/isdk/constants'
 import { lsInstance, makeTree } from '@common/util'
 import config from '@/config'
 export default {
