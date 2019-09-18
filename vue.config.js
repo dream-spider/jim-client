@@ -47,7 +47,7 @@ module.exports = {
       '@components': path.resolve(__dirname, './src/components'),
       '@store': path.resolve(__dirname, './src/store'),
       '@router': path.resolve(__dirname, './src/router'),
-      '@business': path.resolve(__dirname, './src/business')
+      '@business': path.resolve(__dirname, './src/business'),
     }
   },
   publicPath: process.env.VUE_APP__PUBLIC_PATH

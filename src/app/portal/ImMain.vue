@@ -19,7 +19,6 @@
 
 <script>
 import api from '@/isdk/api'
-import { hello } from '@/isdk/index.ts'
 export default {
   name: 'index',
   methods: {
@@ -37,7 +36,6 @@ export default {
   created () {
     this.queryCustomeServiceList()
     console.log(1)
-    hello()
   },
   data () {
     return {

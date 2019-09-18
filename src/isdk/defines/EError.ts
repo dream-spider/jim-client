@@ -1,0 +1,7 @@
+export enum EError {
+  BAD_REQUEST = 404,
+  UNAUTHORIZED = 401,
+  COMMON_ERROR = 500,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404
+}

@@ -75,7 +75,7 @@ export default {
       avatars: this.$constants.avatars
     }
   },
-  mounted () {
+  created () {
     /**
        * 获取用户信息
        */
