@@ -1,39 +1,6 @@
 import axios from 'axios'
 
 export default {
-  queryCustomerList: () => {
-    return axios.request({
-      url: `/user/customerServices`,
-      method: 'get'
-    })
-  },
-  queryUserById: (userId) => {
-    return axios.request({
-      url: `/user/` + userId,
-      method: 'get',
-      params: {
-        userId
-      }
-    })
-  },
-  applyImServer: (userId) => {
-    return axios.request({
-      url: `/router/imServer`,
-      method: 'get',
-      params: {
-        userId
-      }
-    })
-  },
-  fetchContactList: (userId) => {
-    return axios.request({
-      url: `/user/contacts`,
-      method: 'get',
-      params: {
-        userId
-      }
-    })
-  },
   fetchSessionData: (userId, sessionId) => {
     return axios.request({
       url: `/user/session`,
