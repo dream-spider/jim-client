@@ -1,4 +1,13 @@
-npm install 安装
+# JIM (WIP)
 
-npm run dev 开发
-npm run docs:dev 查看文档
+
+## instruction
+
+```
+npm install or yarn
+
+npm run dev
+
+npm run build
+
+```
