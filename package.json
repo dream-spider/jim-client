@@ -4,7 +4,8 @@
   "description": "```\r npm install\r ```",
   "main": "index.js",
   "scripts": {
-    "dev": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js"
+    "dev": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js",
+    "build": "webpack --config build/portal/webpack.dev.js"
   },
   "repository": {
     "type": "git",

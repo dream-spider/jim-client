@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import api from '@isdk/api'
-import { net } from '@isdk'
+import { net, user } from '@isdk'
 export default {
-  name: 'index',
+  name: 'ImMain',
   methods: {
     queryCustomeServiceList () {
       this.loading = true
-      api.queryCustomerList().then((res) => {
-        this.tableData = res.data.data
+      user.queryCustomerList().then((res) => {
+        console.log(res)
+        this.tableData = res.data
         this.loading = false
       })
     },
@@ -36,9 +36,6 @@ export default {
   },
   created () {
     this.queryCustomeServiceList()
-    console.log(1)
-    console.log(net)
-    window.net = net
   },
   data () {
     return {
