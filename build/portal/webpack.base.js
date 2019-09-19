@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'my-first-webpack.bundle.js'
+    filename: 'bundle.js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.ts'],
@@ -74,11 +74,11 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [{
-            loader: "vue-style-loader" // 将 JS 字符串生成为 style 节点
+            loader: "vue-style-loader"
         }, {
-            loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+            loader: "css-loader"
         }, {
-            loader: "sass-loader" // 将 Sass 编译成 CSS
+            loader: "sass-loader"
         }]
       }
     ]
