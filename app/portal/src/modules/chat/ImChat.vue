@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import api from '@isdk/api'
+import {user} from '@isdk'
 import { Notification, Loading } from 'element-ui'
 import ContactList from '@modules/contact/ImContact'
 import JimMainPanel from './components/JimMainPanel'
@@ -77,7 +77,7 @@ export default {
     /**
        * 获取用户信息
        */
-    api.queryUserById(this.$props.userId).then((res) => {
+    user.queryUserById(this.$props.userId).then((res) => {
       if (!res) {
         return false
       }
