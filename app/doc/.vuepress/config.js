@@ -10,7 +10,8 @@ module.exports = {
       '/posts/': [
         ['todo', '待办事项'],
         ['brainstorm', '头脑风暴'],
-        ['structure', '项目架构说明']
+        ['structure', '项目架构说明'],
+        ['coding-guide', '前端开发规范']
       ]
     }
   }
