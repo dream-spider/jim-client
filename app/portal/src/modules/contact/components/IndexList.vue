@@ -22,7 +22,9 @@
     </transition>
   </div>
 </template>
-<script type="text/javascript">
+
+<script>
+import { avatars } from '@modules/images'
 const INDICATOR_INDURATION = 1000
 const TITLE_HEIGHT = 30
 
@@ -45,7 +47,7 @@ export default {
       currentIndex: 0,
       moving: false,
       currentIndicator: '',
-      avatars: this.$constants.avatars
+      avatars
     }
   },
   watch: {

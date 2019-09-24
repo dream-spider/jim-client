@@ -1,1 +1,5 @@
 export * from './applyImServer'
+export * from './createSession'
+export * from './fetchOfflineMessage'
+export * from './fetchSessionData'
+export * from './signMessage'

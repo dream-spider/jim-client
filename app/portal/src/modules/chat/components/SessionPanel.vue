@@ -33,14 +33,15 @@
 </template>
 
 <script>
-import api from '@isdk/api'
+import { net } from '@isdk'
+import { avatars } from '@modules/images'
 export default {
   name: 'SessionPanel',
   data () {
     return {
       sessionDataLoading: false,
       sessionKeyword: '',
-      avatars: this.$constants.avatars
+      avatars
     }
   },
   props: {
@@ -63,7 +64,7 @@ export default {
         }
         if (activeSessionIndex === null) {
           // 获取最新session
-          const sessionRes = await api.fetchSessionData(this.me.userId, val.sessionId)
+          const sessionRes = await net.fetchSessionData(this.me.userId, val.sessionId)
           if (sessionRes.data) {
             this.sessionList.unshift(Object.assign(sessionRes.data.data[0], { isNew: true }))
           }

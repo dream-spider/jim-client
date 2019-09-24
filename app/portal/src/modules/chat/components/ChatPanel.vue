@@ -23,10 +23,11 @@
 </template>
 
 <script>
+import { avatars } from '@modules/images'
 export default {
   data: function () {
     return {
-      avatars: this.$constants.avatars
+      avatars
     }
   },
   props: {
@@ -34,7 +35,7 @@ export default {
     friend: Object,
     me: Object
   },
-  name: 'ChatPannel',
+  name: 'ChatPanel',
   watch: {
     msgContent: function (newVal, oldVal) {
       if (newVal.length === 0) {

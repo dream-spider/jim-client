@@ -6,7 +6,7 @@
 
 <script>
 import IndexList from './components/IndexList'
-import api from '@isdk/api'
+import { user } from '@isdk'
 export default {
   name: 'ImContact',
   model: {
@@ -21,11 +21,11 @@ export default {
     }
   },
   created () {
-    api.fetchContactList('').then((res) => {
+    user.fetchContactList('').then((res) => {
       if (!res.data) {
         return false
       }
-      this.contactList = res.data.data
+      this.contactList = res.data
     })
   },
   methods: {

@@ -37,16 +37,19 @@
 </template>
 
 <script>
-import {user} from '@isdk'
+import { user, net, constants } from '@isdk'
 import { Notification, Loading } from 'element-ui'
 import ContactList from '@modules/contact/ImContact'
 import JimMainPanel from './components/JimMainPanel'
 import SessionPanel from './components/SessionPanel'
+import { avatars } from '@modules/images'
+
+console.dir(constants)
 export default {
   components: {
-    'contact-list': ContactList,
-    'jim-main-panel': JimMainPanel,
-    'session-panel': SessionPanel
+    ContactList,
+    JimMainPanel,
+    SessionPanel
   },
   data () {
     return {
@@ -70,7 +73,7 @@ export default {
         total: 0,
         pageNum: 0
       },
-      avatars: this.$constants.avatars
+      avatars
     }
   },
   mounted () {
@@ -81,7 +84,7 @@ export default {
       if (!res) {
         return false
       }
-      this.userInfo = res.data.data
+      this.userInfo = res.data
       this.applyServer()
     })
   },
@@ -115,16 +118,16 @@ export default {
           text: '正在创建您与[' + item.name + ']的会话，请稍等......'
         })
 
-        const res = await api.createSession({
+        const res = await net.createSession({
           createBy: this.userInfo.userId,
           friendId: item.id,
-          sessionType: this.$constants.IM_SESSION_TYPE.SINGLE_CHAT
+          sessionType: constants.IM_SESSION_TYPE.SINGLE_CHAT
         })
         if (!res.data) {
           return false
         }
         // 获取最新session
-        const sessionRes = await api.fetchSessionData(this.userInfo.userId, res.data.data)
+        const sessionRes = await net.fetchSessionData(this.userInfo.userId, res.data.data)
         if (sessionRes.data) {
           this.sessionData.unshift(sessionRes.data.data[0])
         }
@@ -141,11 +144,11 @@ export default {
       /**
          * 登录im服务器
          */
-      api.applyImServer(this.userInfo.userId).then((res) => {
+      net.applyImServer(this.userInfo.userId).then((res) => {
         if (!res) {
           return false
         }
-        this.imServerInfo = res.data.data
+        this.imServerInfo = res.data
         this.initIMConnection()
       })
     },
@@ -155,7 +158,7 @@ export default {
       this.session = session.session
       if (session.chatMsg && session.chatMsg.state === '10') {
         // 签收消息
-        api.signMsg(session.session.sessionId).then(res => {
+        net.signMessage(session.session.sessionId).then(res => {
           session.chatMsg.state = '20'
         })
       }
@@ -167,7 +170,7 @@ export default {
         this.msgContent = []
         return
       }
-      api.fetchOfflineMsg({
+      net.fetchOfflineMessage({
         sessionId: this.session.sessionId,
         pageNum: 1,
         pageSize: 10
@@ -175,7 +178,7 @@ export default {
         if (!res) {
           return false
         }
-        let pageData = res.data.data
+        let pageData = res.data
         if (pageData.total > 0) {
           this.msgContent = pageData.list
           this.chat.total = pageData.total
@@ -185,7 +188,7 @@ export default {
     sendHeartBeat () {
       // 定时发送心跳
       let heartBeatMsg = {
-        actionType: this.$constants.IM_ACTION_TYPE.HEART_BEAT,
+        actionType: constants.IM_ACTION_TYPE.HEART_BEAT,
         chatMsg: {
           senderId: this.userInfo.userId, senderName: this.userInfo.userName
         }
@@ -212,7 +215,7 @@ export default {
       console.log('连接成功')
       this.isConnect = true
       let loginMsg = {
-        actionType: this.$constants.IM_ACTION_TYPE.ONLINE,
+        actionType: constants.IM_ACTION_TYPE.ONLINE,
         chatMsg: {
           senderId: this.userInfo.userId, senderName: this.userInfo.userName
         }
@@ -237,7 +240,7 @@ export default {
          *
          */
       switch (msg.code) {
-        case this.$constants.IM_MSG_ACTION_TYPE.CONNECTION_ESTABLISH:
+        case constants.IM_MSG_ACTION_TYPE.CONNECTION_ESTABLISH:
           if (msg.data.length > 0) {
             this.sessionData = msg.data
           }
@@ -246,10 +249,10 @@ export default {
              */
           setInterval(this.sendHeartBeat, 18000)
           break
-        case this.$constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
+        case constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
           console.log(msg.message)
           break
-        case this.$constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
+        case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
           let data = msg.data
           if (data.senderId === this.talkingFriend.userId) {
             // 信息发送人是当前聊天对象，则刷新聊天内容
