@@ -9,7 +9,8 @@ module.exports = {
     sidebar: {
       '/posts/': [
         ['todo', '待办事项'],
-        ['brainstorm', '头脑风暴']
+        ['brainstorm', '头脑风暴'],
+        ['structure', '项目架构说明']
       ]
     }
   }
