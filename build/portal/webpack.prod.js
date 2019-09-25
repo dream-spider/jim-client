@@ -2,11 +2,21 @@ const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
+  optimization: {
+    minimizer: [new UglifyJsPlugin({
+      parallel: true,
+      sourceMap: false,
+      uglifyOptions: {
+        warnings: false
+      }
+    })],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
