@@ -1,10 +1,10 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '../..', dir)
 }
-
 module.exports = {
   context: path.resolve(__dirname, '../../'),
   entry: {
@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../../dist/portal'),
-    filename: 'bundle.[hash].js'
+    filename: '[name].[hash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.ts'],
@@ -65,21 +65,12 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          'vue-style-loader',
-          'css-loader'
+          process.env.NODE_ENV !== 'production' ? "vue-style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
         ]
-      },
-      {
-        test: /\.scss$/,
-        use: [{
-            loader: "vue-style-loader"
-        }, {
-            loader: "css-loader"
-        }, {
-            loader: "sass-loader"
-        }]
       }
     ]
   },
