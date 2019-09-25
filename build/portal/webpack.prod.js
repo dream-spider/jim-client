@@ -1,7 +1,8 @@
+const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const config = require('./app.config')
+const Dotenv = require('dotenv-webpack')
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -10,6 +11,9 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: './app/portal/index.html',
       inject: true,
+    }),
+    new Dotenv({
+      path: path.resolve(__dirname, './env/.env.production'),
     })
   ]
 })

@@ -11,8 +11,8 @@ module.exports = {
     app: './app/portal/main.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, '../../dist/portal'),
+    filename: 'bundle.[hash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.ts'],
