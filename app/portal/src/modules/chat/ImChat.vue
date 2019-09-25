@@ -78,15 +78,9 @@ export default {
   },
   mounted () {
     /**
-       * 获取用户信息
+       * 登录、获取im服务连接信息
        */
-    user.queryUserById(this.$props.userId).then((res) => {
-      if (!res) {
-        return false
-      }
-      this.userInfo = res.data
-      this.applyServer()
-    })
+    this.applyServer()
   },
   methods: {
     sendMsg (msg) {
@@ -144,11 +138,12 @@ export default {
       /**
          * 登录im服务器
          */
-      net.applyImServer(this.userInfo.userId).then((res) => {
+      net.applyImServer(this.$props.userId).then((res) => {
         if (!res) {
           return false
         }
-        this.imServerInfo = res.data
+        this.userInfo = res.data.user
+        this.imServerInfo = res.data.imServerVO
         this.initIMConnection()
       })
     },
