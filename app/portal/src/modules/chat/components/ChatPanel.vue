@@ -1,60 +1,113 @@
 <template>
-  <div class="chat-msg-content" ref="chatContent">
-    <div v-for="content in msgContent" :key="content.msgId" style="padding-top: 0.2em;clear: both;">
-
-      <div v-if="content.senderId == friend.userId" style="float: left; width: 3em;">
-        <el-avatar shape="square" :size="50" fit="contain" :src="avatars[friend.avatar]"></el-avatar>
-      </div>
-      <div v-else style="float: right; width: 3em;">
-        <el-avatar shape="square" :size="50" fit="contain" :src="avatars[me.avatar]"></el-avatar>
-      </div>
-      <div
-        :style="content.senderId != friend.userId?'margin-right: 3.5em;text-align:right;':'margin-left: 3.5em;'">
-        <div style="font-size: 0.8em;color: #355f6b;padding-bottom: 0.2em;">
-          <span>[{{content.senderName}}]</span><span>{{content.sendTime | dateformat()}}</span>
-        </div>
-        <div
-          style="font-size: 0.94em;padding: 0.3em;-webkit-border-radius: 0.5em;-moz-border-radius: 0.5em;border-radius: 0.5em;">
-          <span :style="content.senderId != friend.userId?' color: #24bc88;':'color: #3381bc;'">{{content.msg}}</span>
-        </div>
+  <div class="chat-panel">
+    <!--title-->
+    <div class="chat-title">
+      {{friend.userName}}
+    </div>
+    <!--chat content-->
+    <div style="height: 55%;">
+      <chat-content :msgContent="msgContent" :me="me" :friend="friend"></chat-content>
+    </div>
+    <div style="height: 6%;text-align: right; background-color: white">
+      <el-button-group style="padding:0.5em">
+        <el-button  plain size="mini">投诉历史</el-button>
+        <el-button  plain size="mini">查询订单</el-button>
+        <el-button  plain size="mini" icon="el-icon-time" @click="openChatHistory">聊天记录</el-button>
+      </el-button-group>
+    </div>
+    <!--msg sender-->
+    <div class="chat-sender">
+      <el-input v-model.trim="hotMsg" resize="none" type="textarea" rows="5" style="height: 75%;"></el-input>
+      <div style="padding: 0.3em; float: right;">
+        <el-button type="success" @click="sendMsg" plain>发送</el-button>
       </div>
     </div>
+
+    <el-drawer
+      :title="chatHistoryTitle"
+      :visible.sync="chatHistory"
+      direction="rtl"
+      size="70%"
+      destroy-on-close
+    >
+      <chat-history :sessionId="sessionId" :me="me" :friend="friend"></chat-history>
+    </el-drawer>
   </div>
 </template>
-
 <script>
-import { avatars } from '@modules/images'
+import ChatContent from './ChatContent'
+import ChatHistory from './ChatHistory'
+import { constants } from '@isdk'
 export default {
+  name: 'JimMainPanel',
+  components: {
+    'chat-content': ChatContent,
+    'chat-history': ChatHistory
+  },
   data: function () {
     return {
-      avatars
+      hotMsg: '',
+      chatHistory: false
     }
   },
   props: {
     msgContent: Array,
     friend: Object,
-    me: Object
+    me: Object,
+    sessionId: String
   },
-  name: 'ChatPanel',
-  watch: {
-    msgContent: function (newVal, oldVal) {
-      if (newVal.length === 0) {
-        return
+  computed: {
+    chatHistoryTitle: function () {
+      return '与[' + this.friend.userName + ']的聊天记录'
+    }
+  },
+  methods: {
+    sendMsg (msg) {
+      if (this.hotMsg) {
+        let msg = {
+          actionType: constants.IM_ACTION_TYPE.SINGLE_CHAT,
+          chatMsg: {
+            senderId: this.me.userId,
+            senderName: this.me.userName,
+            receiverId: this.friend.userId,
+            msg: this.hotMsg,
+            sessionId: this.sessionId
+          }
+        }
+
+        this.msgContent.push({
+          msg: this.hotMsg,
+          senderName: this.me.userName,
+          sessionId: this.sessionId,
+          state: '20',
+          sendTime: new Date()
+        })
+        this.$emit('sendMsg', msg)
+        this.hotMsg = ''
       }
-      this.$nextTick(function () {
-        this.$refs.chatContent.scrollTop = this.$refs.chatContent.scrollHeight
-      })
+    },
+    openChatHistory () {
+      this.chatHistory = true
     }
   }
 }
 </script>
 
 <style scoped>
-  .chat-msg-content {
-    height: 100%;
+  .chat-panel {
+    background-color: #e0e3e4;
+    height: 41em;
+  }
+
+  .chat-title {
+    height: 5%;
+    background-color: #909399;
+    color: #daddde;
+    text-align: center;
+    padding-top: 0.2em;
+  }
+  .chat-sender {
+    height: 25%;
     background-color: #daddde;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 0.2em 0.1em 0.2em 0.1em
   }
 </style>

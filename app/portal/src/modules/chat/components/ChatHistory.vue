@@ -1,6 +1,6 @@
 <template>
   <div style="height: 80%;" >
-    <chat-panel :msgContent="msgContent" :me="me" :friend="friend"></chat-panel>
+    <chat-content :msgContent="msgContent" :me="me" :friend="friend"></chat-content>
     <el-pagination
       layout="prev, pager, next"
       :page-size="10"
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import ChatPanel from './ChatPanel'
+import ChatContent from './ChatContent'
 import api from '@isdk/api'
 export default {
   name: 'ChatHistory',
   components: {
-    'chat-panel': ChatPanel
+    'chat-content': ChatContent
   },
   data: function () {
     return {

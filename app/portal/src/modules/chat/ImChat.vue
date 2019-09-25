@@ -4,7 +4,7 @@
       <el-col :span="2">
         <div class="sideBar">
           <el-avatar shape="square" :size="50" fit="fill" :src="avatars[userInfo.avatar]"></el-avatar>
-          <el-link type="info">{{userInfo.userName}}</el-link>
+          <el-link type="info" style="width: 100%">{{userInfo.userName}}</el-link>
           <el-menu default-active="1" mode="vertical" background-color="#483348" @select="handleMenuSelect">
             <el-menu-item index="1">
               <i class="el-icon-chat-dot-round"></i>
@@ -21,8 +21,8 @@
       <el-col :span="5" v-if="menu.active==='chat'">
         <session-panel :sessionList="sessionData" :activeSession="session.sessionId" :mutationSession="mutationSession" :me="userInfo" @startChat="startChat"></session-panel>
       </el-col>
-      <el-col :span="17" v-if="session.sessionId!=null">
-        <jim-main-panel :msgContent="msgContent" :me="userInfo" :friend="talkingFriend"  :sessionId="session.sessionId" @sendMsg="sendMsg"></jim-main-panel>
+      <el-col :span="17" v-if="menu.active==='chat'&&session.sessionId!=null">
+        <chat-panel :msgContent="msgContent" :me="userInfo" :friend="talkingFriend"  :sessionId="session.sessionId" @sendMsg="sendMsg"></chat-panel>
       </el-col>
       <el-col :span="10" v-if="menu.active==='contact'">
         <div style="height: 41em; padding-top: 0.2em;">
@@ -40,16 +40,16 @@
 import { user, net, constants } from '@isdk'
 import { Notification, Loading } from 'element-ui'
 import ContactList from '@modules/contact/ImContact'
-import JimMainPanel from './components/JimMainPanel'
+import ChatPanel from './components/ChatPanel'
 import SessionPanel from './components/SessionPanel'
 import { avatars } from '@modules/images'
 
 console.dir(constants)
 export default {
   components: {
-    ContactList,
-    JimMainPanel,
-    SessionPanel
+    'contact-list': ContactList,
+    'chat-panel': ChatPanel,
+    'session-panel': SessionPanel
   },
   data () {
     return {
@@ -78,15 +78,9 @@ export default {
   },
   mounted () {
     /**
-       * 获取用户信息
+       * 登录、获取im服务连接信息
        */
-    user.queryUserById(this.$props.userId).then((res) => {
-      if (!res) {
-        return false
-      }
-      this.userInfo = res.data
-      this.applyServer()
-    })
+    this.applyServer()
   },
   methods: {
     sendMsg (msg) {
@@ -127,9 +121,9 @@ export default {
           return false
         }
         // 获取最新session
-        const sessionRes = await net.fetchSessionData(this.userInfo.userId, res.data.data)
+        const sessionRes = await net.fetchSessionData(this.userInfo.userId, res.data)
         if (sessionRes.data) {
-          this.sessionData.unshift(sessionRes.data.data[0])
+          this.sessionData.unshift(sessionRes.data[0])
         }
         this.startChat(this.sessionData[0])
         createSessionLoading.close()
@@ -144,11 +138,12 @@ export default {
       /**
          * 登录im服务器
          */
-      net.applyImServer(this.userInfo.userId).then((res) => {
+      net.applyImServer(this.$props.userId).then((res) => {
         if (!res) {
           return false
         }
-        this.imServerInfo = res.data
+        this.userInfo = res.data.user
+        this.imServerInfo = res.data.imServerVO
         this.initIMConnection()
       })
     },

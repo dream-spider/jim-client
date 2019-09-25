@@ -66,7 +66,7 @@ export default {
           // 获取最新session
           const sessionRes = await net.fetchSessionData(this.me.userId, val.sessionId)
           if (sessionRes.data) {
-            this.sessionList.unshift(Object.assign(sessionRes.data.data[0], { isNew: true }))
+            this.sessionList.unshift(Object.assign(sessionRes.data[0], { isNew: true }))
           }
           return
         }
