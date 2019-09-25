@@ -4,7 +4,7 @@
       <el-col :span="2">
         <div class="sideBar">
           <el-avatar shape="square" :size="50" fit="fill" :src="avatars[userInfo.avatar]"></el-avatar>
-          <el-link type="info">{{userInfo.userName}}</el-link>
+          <el-link type="info" style="width: 100%">{{userInfo.userName}}</el-link>
           <el-menu default-active="1" mode="vertical" background-color="#483348" @select="handleMenuSelect">
             <el-menu-item index="1">
               <i class="el-icon-chat-dot-round"></i>
@@ -129,7 +129,7 @@ export default {
         // 获取最新session
         const sessionRes = await net.fetchSessionData(this.userInfo.userId, res.data.data)
         if (sessionRes.data) {
-          this.sessionData.unshift(sessionRes.data.data[0])
+          this.sessionData.unshift(sessionRes.data[0])
         }
         this.startChat(this.sessionData[0])
         createSessionLoading.close()
