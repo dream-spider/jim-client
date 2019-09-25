@@ -2,8 +2,11 @@ const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const config = require('./app.config')
 const Dotenv = require('dotenv-webpack')
+
+const port = process.env.PORT || 3000
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
@@ -11,8 +14,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     hot: true,
     compress: true,
-    port: 3000,
+    port: port,
     publicPath: '/',
+    clientLogLevel: 'warning',
+    quiet: true,
     proxy: {
       '/user': {
         target: `${config.deploy.requestBaseUrl}/user`,
@@ -54,7 +59,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new Dotenv({
       path: path.resolve(__dirname, './env/.env.development')
-    })
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`You application is running here http://localhost:${port}`],
+      }
+    }),
   ]
 })
 

@@ -4,7 +4,7 @@
   "description": "```\r npm install\r ```",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development PORT=3000 node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js",
     "build": "rimraf ./dist/portal && cross-env NODE_ENV=production webpack --config build/portal/webpack.prod.js",
     "docs:dev": "vuepress dev app/doc"
   },
@@ -25,6 +25,7 @@
     "css-loader": "^3.2.0",
     "dotenv-webpack": "^1.7.0",
     "file-loader": "^4.2.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.10.0",
