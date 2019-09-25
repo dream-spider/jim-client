@@ -2,16 +2,17 @@
 
 ## Build
 1. 使用Lerna做monorepo管理
-2. Build脚本
-3. Unit test scaffold
-4. lint and format with commit hook
+2. Unit test scaffold
+3. lint and format with commit hook
+4. 使用动态引入，减少包大小
+
 
 ## Portal
-1. portal build脚本
+1. ~~portal build脚本~~
 2. eslint, typescript, standard集成
-3. 迁移目前api至isdk，约定出入口interface
+3. ~~迁移目前api至isdk，约定出入口interface~~
 4. login页面 + login接口
-5. router设置
+5. ~~router设置~~
 6. socket onmessage使用RxJs分流，定义subscriber
 7. 数据缓存机制研究
 
