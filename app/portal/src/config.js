@@ -1,11 +1,8 @@
 module.exports = {
-  service: {
-    baseInterfaceUrl: process.env.VUE_APP__BASE_URL
-  },
   authorization: {
-    authenticationUrl: process.env.VUE_APP__SSO,
-    clientId: process.env.VUE_APP_CLIENT_ID,
-    indexPage: process.env.VUE_APP__PAGE
+    authenticationUrl: process.env.SSO_URL,
+    clientId: process.env.SSO_CLIENT_ID,
+    indexPage: process.env.SSO_INDEX_PATH
   },
   system: {
     menuRoot: '10'

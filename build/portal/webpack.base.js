@@ -1,27 +1,23 @@
-const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
-function resolve (dir) {
-  return path.join(__dirname, '../..', dir)
-}
+const utils = require('./utils')
 
 module.exports = {
-  context: resolve('.'),
+  context: utils.resolve('.'),
   entry: {
-    app: resolve('./app/portal/main.js'),
+    app: utils.resolve('./app/portal/main.js'),
   },
   output: {
     publicPath: './',
-    path: resolve('./dist/portal'),
+    path: utils.resolve('./dist/portal'),
     filename: '[name].[hash].js'
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@isdk': resolve('isdk'),
-      '@': resolve('./app/portal/src'),
-      '@modules': resolve('./app/portal/src/modules')
+      '@isdk': utils.resolve('isdk'),
+      '@': utils.resolve('./app/portal/src'),
+      '@modules': utils.resolve('./app/portal/src/modules')
     }
   },
   module: {

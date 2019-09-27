@@ -1,10 +1,15 @@
 const path = require('path')
+const utils = require('./utils')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
+const DotEnvWebpackPlugin = require('dotenv-webpack')
+
+// 使用dotenv读取.env文件，植入process.env
+const envPath = path.resolve(__dirname, './env/.env.production')
+utils.loadEnv(envPath)
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -23,8 +28,8 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
       template: './app/portal/index.html',
       inject: true,
     }),
-    new Dotenv({
-      path: path.resolve(__dirname, './env/.env.production'),
+    new DotEnvWebpackPlugin({
+      path: envPath,
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
