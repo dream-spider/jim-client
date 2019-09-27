@@ -15,7 +15,7 @@ module.exports = {
     filename: '[name].[hash].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.ts'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       '@isdk': resolve('isdk'),
       '@': resolve('./app/portal/src'),

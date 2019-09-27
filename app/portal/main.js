@@ -4,12 +4,27 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
 import dayjs from 'dayjs'
 import '@modules/theme/index.scss'
 
-Vue.use(ElementUI)
+import { 
+  Table, 
+  TableColumn, 
+  Main, 
+  Container, 
+  Loading, 
+  Button 
+} from 'element-ui'
+
+const components = [
+  Table, TableColumn, Main, Container,
+  Loading, Button
+]
+
+components.forEach((component) => {
+  Vue.use(component)
+})
+
 Vue.config.productionTip = false
 Vue.filter('dateformat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
   return dayjs(dataStr).format(pattern)

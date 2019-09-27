@@ -1,4 +1,3 @@
-import test from './test.jpg'
 import avatar1 from './avatar/avatar1.jpg'
 import avatar2 from './avatar/avatar2.jpg'
 import avatar3 from './avatar/avatar3.jpg'
@@ -25,6 +24,5 @@ const avatars = {
   avatar11,
 }
 export {
-  test,
   avatars
 }

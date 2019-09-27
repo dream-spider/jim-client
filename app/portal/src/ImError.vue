@@ -1,7 +1,5 @@
 <template>
   <div class="error-body clearfix">
-    <img src="@modules/images/test.jpg"
-           alt="">
     <div v-if="$route.query.errorCode === '403'">
       <p class="fs22">对不起，您没有该页面的访问权限！</p>
     </div>
