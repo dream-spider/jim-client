@@ -19,34 +19,34 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     quiet: true,
     proxy: {
-      '/user': {
+      '/api/user': {
         target: `${config.deploy.requestBaseUrl}/user`,
         changeOrigin: true,
         pathRewrite: {
-          '^/user': ''
+          '^/api/user': ''
         }
       },
-      '/msg': {
+      '/api/msg': {
         target: `${config.deploy.requestBaseUrl}/msg`,
         changeOrigin: true,
         pathRewrite: {
-          '^/msg': ''
+          '^/api/msg': ''
         }
       },
 
-      '/router': {
+      '/api/router': {
         target: `${config.deploy.requestBaseUrl}/router`,
         changeOrigin: true,
         pathRewrite: {
-          '^/router': ''
+          '^/api/router': ''
         }
       },
-      '/': {
+      '/api/': {
         ws: false,
         target: `${config.deploy.requestBaseUrl}/`,
         changeOrigin: true,
         pathRewrite: {
-          '^/': ''
+          '^/api': ''
         }
       }
     }

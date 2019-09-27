@@ -11,6 +11,7 @@ module.exports = {
     app: './app/portal/main.js',
   },
   output: {
+    publicPath: './',
     path: path.resolve(__dirname, '../../dist/portal'),
     filename: '[name].[hash].js'
   },

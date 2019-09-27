@@ -1,7 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { IResponse } from '../defines/IResponse'
 
-const instance = axios.create()
+const instance = axios.create({
+  baseURL: '/api/',
+})
 
 const onError = () => {
 
