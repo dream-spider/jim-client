@@ -5,14 +5,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 function resolve (dir) {
   return path.join(__dirname, '../..', dir)
 }
+
 module.exports = {
-  context: path.resolve(__dirname, '../../'),
+  context: resolve('.'),
   entry: {
-    app: './app/portal/main.js',
+    app: resolve('./app/portal/main.js'),
   },
   output: {
     publicPath: './',
-    path: path.resolve(__dirname, '../../dist/portal'),
+    path: resolve('./dist/portal'),
     filename: '[name].[hash].js'
   },
   resolve: {
