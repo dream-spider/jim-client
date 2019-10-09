@@ -8,7 +8,7 @@ module.exports = {
     app: utils.resolve('./app/portal/main.js'),
   },
   output: {
-    publicPath: './',
+    publicPath: process.env.BUILD_PUBLIC_PATH || './',
     path: utils.resolve('./dist/portal'),
     filename: '[name].[hash].js'
   },

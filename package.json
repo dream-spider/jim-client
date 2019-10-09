@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=3000 node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js",
     "build": "rimraf ./dist/portal && cross-env NODE_ENV=production webpack --config build/portal/webpack.prod.js",
-    "docs:dev": "vuepress dev app/doc"
+    "docs:dev": "vuepress dev --port 3030 app/doc"
   },
   "repository": {
     "type": "git",
