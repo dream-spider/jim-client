@@ -18,12 +18,13 @@ console.log(process.env.PORT, serviceRequestCtx, serviceRequestUrl, process.env.
 
 const makeDevProxy = function () {
   let proxy = {}
-  proxy[path.join(serviceRequestCtx)] = {
+  proxy[serviceRequestCtx] = {
     target: serviceRequestUrl,
     changeOrigin: true,
     pathRewrite: {}
   }
-  proxy[path.join(serviceRequestCtx)].pathRewrite[path.join('^/', serviceRequestCtx)] = ''
+  proxy[serviceRequestCtx].pathRewrite[`^${serviceRequestCtx}`] = ''
+  console.log(proxy)
   return proxy
 }
 

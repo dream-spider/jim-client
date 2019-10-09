@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const DotEnvWebpackPlugin = require('dotenv-webpack')
+const BundleVisualizer = require('webpack-visualizer-plugin');
 
 // 使用dotenv读取.env文件，植入process.env
 
@@ -17,18 +18,25 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   output: {
     publicPath: process.env.BUILD_PUBLIC_PATH || './',
     path: utils.resolve('./dist/portal'),
-    filename: '[name].[hash].js'
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].chunk.js',
   },
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
     minimizer: [new UglifyJsPlugin({
       parallel: true,
-      sourceMap: false,
+      sourceMap: process.env.NODE_ENV === 'test',
       uglifyOptions: {
         warnings: false
       }
     })],
   },
   plugins: [
+    new BundleVisualizer({
+      filename: './bundle-report-statistics.html'
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './app/portal/index.html',
