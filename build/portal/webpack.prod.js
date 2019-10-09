@@ -8,7 +8,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const DotEnvWebpackPlugin = require('dotenv-webpack')
 
 // 使用dotenv读取.env文件，植入process.env
-const envPath = path.resolve(__dirname, './env/.env.production')
+
+const envPath = path.resolve(__dirname, `./env/.env.${process.env.NODE_ENV}`)
 utils.loadEnv(envPath)
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
