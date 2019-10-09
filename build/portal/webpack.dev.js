@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000
 const serviceRequestCtx = process.env.SERVICE_REQUEST_CTX
 const serviceRequestUrl = process.env.SERVICE_REQUEST_URL
 
-console.log(process.env.PORT, serviceRequestUrl, process.env.NODE_ENV)
+console.log(process.env.PORT, serviceRequestCtx, serviceRequestUrl, process.env.NODE_ENV)
 
 const makeDevProxy = function () {
   let proxy = {}
