@@ -14,6 +14,11 @@ utils.loadEnv(envPath)
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
+  output: {
+    publicPath: process.env.BUILD_PUBLIC_PATH || './',
+    path: utils.resolve('./dist/portal'),
+    filename: '[name].[hash].js'
+  },
   optimization: {
     minimizer: [new UglifyJsPlugin({
       parallel: true,
