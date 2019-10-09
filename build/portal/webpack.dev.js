@@ -11,9 +11,21 @@ const envPath = path.resolve(__dirname, './env/.env.development')
 utils.loadEnv(envPath)
 
 const port = process.env.PORT || 3000
+const serviceRequestCtx = process.env.SERVICE_REQUEST_CTX
 const serviceRequestUrl = process.env.SERVICE_REQUEST_URL
 
 console.log(process.env.PORT, serviceRequestUrl, process.env.NODE_ENV)
+
+const makeDevProxy = function () {
+  let proxy = {}
+  proxy[path.join(serviceRequestCtx)] = {
+    target: serviceRequestUrl,
+    changeOrigin: true,
+    pathRewrite: {}
+  }
+  proxy[path.join(serviceRequestCtx)].pathRewrite[path.join('^/', serviceRequestCtx)] = ''
+  return proxy
+}
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
@@ -25,38 +37,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     publicPath: '/',
     clientLogLevel: 'warning',
     quiet: true,
-    proxy: {
-      '/api/user': {
-        target: `${serviceRequestUrl}/user`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api/user': ''
-        }
-      },
-      '/api/msg': {
-        target: `${serviceRequestUrl}/msg`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api/msg': ''
-        }
-      },
-
-      '/api/router': {
-        target: `${serviceRequestUrl}/router`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api/router': ''
-        }
-      },
-      '/api/': {
-        ws: false,
-        target: `${serviceRequestUrl}/`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }
+    proxy: makeDevProxy()
   },
   plugins: [
     new HtmlWebpackPlugin({

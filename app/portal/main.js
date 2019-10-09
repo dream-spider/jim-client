@@ -13,12 +13,31 @@ import {
   Main, 
   Container, 
   Loading, 
-  Button 
+  Button,
+  Row,
+  Col,
+  Avatar,
+  Link,
+  Menu,
+  MenuItem,
+  Input,
+  Badge,
+  ButtonGroup,
+  Drawer,
+  Pagination,
 } from 'element-ui'
 
 const components = [
   Table, TableColumn, Main, Container,
-  Loading, Button
+  Loading, Button, Row, Col, Avatar,
+  Link,
+  Menu,
+  MenuItem,
+  Input,
+  Badge,
+  ButtonGroup,
+  Drawer,
+  Pagination,
 ]
 
 components.forEach((component) => {
