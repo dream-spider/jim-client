@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const DotEnvWebpackPlugin = require('dotenv-webpack')
-const BundleVisualizer = require('webpack-visualizer-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // 使用dotenv读取.env文件，植入process.env
 
@@ -34,8 +34,10 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     })],
   },
   plugins: [
-    new BundleVisualizer({
-      filename: './bundle-report-statistics.html'
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'bundle-analyze.html',
+      openAnalyzer: true,
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
