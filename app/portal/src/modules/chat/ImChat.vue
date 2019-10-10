@@ -22,7 +22,7 @@
         <session-panel :sessionList="sessionData" :activeSession="session.sessionId" :mutationSession="mutationSession" :me="userInfo" @startChat="startChat"></session-panel>
       </el-col>
       <el-col :span="17" v-if="menu.active==='chat'&&session.sessionId!=null">
-        <chat-panel :msgContent="msgContent" :me="userInfo" :friend="talkingFriend"  :sessionId="session.sessionId" @sendMsg="sendMsg"></chat-panel>
+        <chat-panel :msgContent="msgContent" :me="userInfo" :friend="talkingFriend"  :sessionId="session.sessionId" :groupId="clientId" @sendMsg="sendMsg"></chat-panel>
       </el-col>
       <el-col :span="10" v-if="menu.active==='contact'">
         <div style="height: 41em; padding-top: 0.2em;">
@@ -43,6 +43,7 @@ import ContactList from '@modules/contact/ImContact'
 import ChatPanel from './components/ChatPanel'
 import SessionPanel from './components/SessionPanel'
 import { avatars } from '@modules/images'
+import config from '@/config'
 
 console.dir(constants)
 export default {
@@ -67,13 +68,14 @@ export default {
         active: 'chat'
       },
       mutationSession: {
-        sessionId: '', msg: '', sendTime: '', senderId: '', isNew: null
+        sessionId: '', msg: '', sendTime: '', senderId: '', isNew: null, groupId: null
       },
       chat: {
         total: 0,
         pageNum: 0
       },
-      avatars
+      avatars,
+      clientId: config.authorization.clientId
     }
   },
   mounted () {
@@ -87,12 +89,13 @@ export default {
       this.socket.send(JSON.stringify(msg))
       this.refreshMutationSession(msg.chatMsg)
     },
-    refreshMutationSession ({ sessionId, msg, sendTime, senderId, isNew }) {
+    refreshMutationSession ({ sessionId, msg, sendTime, senderId, isNew, groupId }) {
       this.mutationSession.sessionId = sessionId
       this.mutationSession.senderId = senderId
       this.mutationSession.msg = msg
       this.mutationSession.sendTime = sendTime
       this.mutationSession.isNew = isNew
+      this.mutationSession.groupId = groupId
     },
     // 选择对话好友
     async choose (item) {
@@ -115,7 +118,8 @@ export default {
         const res = await net.createSession({
           createBy: this.userInfo.userId,
           friendId: item.id,
-          sessionType: constants.IM_SESSION_TYPE.SINGLE_CHAT
+          sessionType: constants.IM_SESSION_TYPE.SINGLE_CHAT,
+          groupId: this.clientId
         })
         if (!res.data) {
           return false
@@ -185,7 +189,7 @@ export default {
       let heartBeatMsg = {
         actionType: constants.IM_ACTION_TYPE.HEART_BEAT,
         chatMsg: {
-          senderId: this.userInfo.userId, senderName: this.userInfo.userName
+          senderId: this.userInfo.userId, senderName: this.userInfo.userName, groupId: this.clientId
         }
       }
       this.socket.send(JSON.stringify(heartBeatMsg))
@@ -212,9 +216,10 @@ export default {
       let loginMsg = {
         actionType: constants.IM_ACTION_TYPE.ONLINE,
         chatMsg: {
-          senderId: this.userInfo.userId, senderName: this.userInfo.userName
+          senderId: this.userInfo.userId, senderName: this.userInfo.userName, groupId: this.clientId
         }
       }
+      console.log(JSON.stringify(loginMsg))
       this.socket.send(JSON.stringify(loginMsg))
     },
     onclose () {
