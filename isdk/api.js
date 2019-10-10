@@ -11,14 +11,15 @@ export default {
       }
     })
   },
-  createSession: ({ createBy, friendId, sessionType }) => {
+  createSession: ({ createBy, friendId, sessionType, groupId }) => {
     return axios.request({
       url: `/user/session`,
       method: 'post',
       data: {
         createBy,
         friendId,
-        sessionType
+        sessionType,
+        groupId
       }
     })
   },

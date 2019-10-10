@@ -54,7 +54,8 @@ export default {
     msgContent: Array,
     friend: Object,
     me: Object,
-    sessionId: String
+    sessionId: String,
+    groupId: String
   },
   computed: {
     chatHistoryTitle: function () {
@@ -71,7 +72,8 @@ export default {
             senderName: this.me.userName,
             receiverId: this.friend.userId,
             msg: this.hotMsg,
-            sessionId: this.sessionId
+            sessionId: this.sessionId,
+            groupId: this.groupId
           }
         }
 
