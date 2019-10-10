@@ -7,11 +7,6 @@ module.exports = {
   entry: {
     app: utils.resolve('./app/portal/main.js'),
   },
-  output: {
-    publicPath: process.env.BUILD_PUBLIC_PATH || './',
-    path: utils.resolve('./dist/portal'),
-    filename: '[name].[hash].js'
-  },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
