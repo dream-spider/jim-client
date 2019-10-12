@@ -1,0 +1,15 @@
+{
+  "name": "doc",
+  "version": "1.0.0",
+  "description": "JIM-Client Document Service",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev --port 3000"
+  },
+  "keywords": [],
+  "author": "Hao Peng <phshy0607@outlook.com>",
+  "license": "ISC",
+  "dependencies": {
+    "vuepress": "^1.2.0"
+  }
+}
