@@ -7,7 +7,8 @@
     "dev": "cross-env NODE_ENV=development PORT=3000 node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/portal/webpack.dev.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config build/portal/webpack.prod.js",
     "build:test": "cross-env NODE_ENV=test webpack --config build/portal/webpack.prod.js",
-    "dev:docs": "cd app/doc &&  npm run dev"
+    "dev:docs": "cd app/doc && npm run dev",
+    "build:docs": "cd app/doc && npm run build"
   },
   "repository": {
     "type": "git",

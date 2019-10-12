@@ -4,7 +4,8 @@
   "description": "JIM-Client Document Service",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev --port 3000"
+    "dev": "vuepress dev --port 3000",
+    "build": "vuepress build"
   },
   "keywords": [],
   "author": "Hao Peng <phshy0607@outlook.com>",

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>前端开发规范 | JIM</title>
+    <meta name="description" content="Document">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.4aa5b34e.css" as="style"><link rel="preload" href="/assets/js/app.30cf12b4.js" as="script"><link rel="preload" href="/assets/js/2.6994c8a5.js" as="script"><link rel="preload" href="/assets/js/6.bff94256.js" as="script"><link rel="prefetch" href="/assets/js/10.88471469.js"><link rel="prefetch" href="/assets/js/11.e7d5137e.js"><link rel="prefetch" href="/assets/js/3.a77ce0a7.js"><link rel="prefetch" href="/assets/js/4.4ca32c41.js"><link rel="prefetch" href="/assets/js/5.aa27ab5c.js"><link rel="prefetch" href="/assets/js/7.3e6819b9.js"><link rel="prefetch" href="/assets/js/8.1d5a68e1.js"><link rel="prefetch" href="/assets/js/9.2fdd5e09.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4aa5b34e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">JIM</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/posts/" class="nav-link router-link-active">Posts</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/posts/" class="nav-link router-link-active">Posts</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/posts/todo.html" class="sidebar-link">待办事项</a></li><li><a href="/posts/brainstorm.html" class="sidebar-link">头脑风暴</a></li><li><a href="/posts/structure.html" class="sidebar-link">项目架构说明</a></li><li><a href="/posts/coding-guide.html" class="active sidebar-link">前端开发规范</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/posts/coding-guide.html#项目规划" class="sidebar-link">项目规划</a></li><li class="sidebar-sub-header"><a href="/posts/coding-guide.html#代码结构" class="sidebar-link">代码结构</a></li><li class="sidebar-sub-header"><a href="/posts/coding-guide.html#开发规范" class="sidebar-link">开发规范</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="jim前端架构设计与开发规范"><a href="#jim前端架构设计与开发规范" aria-hidden="true" class="header-anchor">#</a> JIM前端架构设计与开发规范</h1> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>本篇中开发规范带有强烈个人色彩，斟酌阅读</p></div> <h2 id="项目规划"><a href="#项目规划" aria-hidden="true" class="header-anchor">#</a> 项目规划</h2> <p>目前JIM的业务范围是为第三方提供IM服务，包括sdk集成，第三方数据接入和JIM独立版。
+前端分为3大模块，也是3个子项目，分别处理相关业务。</p> <p>Portal: JIM的独立版本
+Admin: 提供给第三方的系统配置，包括用户导入，角色管理，权限管理，品牌管理等
+SDK: 提供给第三方的IM入口，目前考虑以iframe方式集成至目标系统</p> <h2 id="代码结构"><a href="#代码结构" aria-hidden="true" class="header-anchor">#</a> 代码结构</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">|</span><span class="token operator">--</span> app<span class="token operator">/</span>
+    <span class="token operator">|</span><span class="token operator">--</span> doc <span class="token comment">// Vuepress文档服务器</span>
+    <span class="token operator">|</span><span class="token operator">--</span> portal<span class="token operator">/</span> <span class="token comment">// Portal根目录</span>
+        <span class="token operator">|</span><span class="token operator">--</span> src<span class="token operator">/</span>
+            <span class="token operator">|</span><span class="token operator">--</span> modules <span class="token comment">// 各个模块的代码</span>
+                <span class="token operator">|</span><span class="token operator">--</span> boarding <span class="token comment">// 登录、注册入口</span>
+                <span class="token operator">|</span><span class="token operator">--</span> chat <span class="token comment">// 聊天模块</span>
+                <span class="token operator">|</span><span class="token operator">--</span> contact <span class="token comment">// 联系人模块</span>
+                <span class="token operator">|</span><span class="token operator">--</span> common <span class="token comment">// 共用工具类，组件等</span>
+                <span class="token operator">|</span><span class="token operator">--</span> images <span class="token comment">// 图片</span>
+                <span class="token operator">|</span><span class="token operator">--</span> layout <span class="token comment">// 排版组件</span>
+                <span class="token operator">|</span><span class="token operator">--</span> store <span class="token comment">// Vuex</span>
+                <span class="token operator">|</span><span class="token operator">--</span> theme <span class="token comment">// 公共样式</span>
+            <span class="token operator">|</span><span class="token operator">--</span> App<span class="token punctuation">.</span>vue <span class="token comment">// Vue的根组件</span>
+            <span class="token operator">|</span><span class="token operator">--</span> config<span class="token punctuation">.</span>js <span class="token comment">// 项目配置 待定</span>
+            <span class="token operator">...</span>
+        <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>html
+        <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
+<span class="token operator">|</span><span class="token operator">--</span> build <span class="token comment">// build脚本</span>
+<span class="token operator">|</span><span class="token operator">--</span> isdk <span class="token comment">// internal sdk，用来处理api call，常量，缓存。相当于ui层的end point</span>
+<span class="token operator">|</span><span class="token operator">--</span> <span class="token operator">...</span>
+</code></pre></div><h2 id="开发规范"><a href="#开发规范" aria-hidden="true" class="header-anchor">#</a> 开发规范</h2> <blockquote><p>开发规范会以一小点一小点总结，后续会归纳整理</p></blockquote> <ol><li>嵌套结构数据获取</li></ol> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">import</span> _get <span class="token keyword">from</span> <span class="token string">'lodash/get'</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fetchAndProcess</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">params</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">api</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span>
+
+  <span class="token comment">// 严禁出现此类数据嵌套和获取方式</span>
+  <span class="token keyword">const</span> user <span class="token operator">=</span> response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">.</span>list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+  <span class="token comment">// 推荐</span>
+  <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token function">_get</span><span class="token punctuation">(</span>response<span class="token punctuation">,</span> <span class="token string">'data.data.list.0'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>组件定义与使用规范</li></ol> <ul><li><p>严禁使用毫无意义的名称，例如 'list', 'IndexList', 'UserInfo'</p></li> <li><p>严禁使用index.vue和main.vue之类的类根组件文件</p></li> <li><p>组件文件名使用大驼峰，组件内name要求与文件名一致，方便debug和一致性</p></li> <li><p>向外暴露的根组件使用Im作为前缀。</p></li> <li><p>不向外暴露的组件且只为某些个别组件服务的子组件，不需要使用Im开头</p> <p>例如：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">|</span><span class="token operator">--</span> common<span class="token operator">/</span>
+    <span class="token operator">|</span><span class="token operator">--</span> components<span class="token operator">/</span>
+        <span class="token operator">|</span><span class="token operator">--</span> selector<span class="token operator">/</span>
+            <span class="token operator">|</span><span class="token operator">--</span> ImUserSelector<span class="token punctuation">.</span>vue <span class="token comment">// 对外暴露的共用组件</span>
+            <span class="token operator">|</span><span class="token operator">--</span> UserSelectorItem<span class="token punctuation">.</span>vue <span class="token comment">// 不期望外界引入的子组件，服务于ImUserSelector</span>
+            <span class="token operator">|</span><span class="token operator">--</span> UserSelectorSearchBar<span class="token punctuation">.</span>vue <span class="token comment">// 不期望外界引入的子组件，服务于ImUserSelector</span>
+</code></pre></div></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/posts/structure.html" class="prev">项目架构说明</a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.30cf12b4.js" defer></script><script src="/assets/js/2.6994c8a5.js" defer></script><script src="/assets/js/6.bff94256.js" defer></script>
+  </body>
+</html>

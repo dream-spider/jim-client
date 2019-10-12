@@ -1,6 +1,7 @@
 module.exports = {
   title: 'JIM',
   description: 'Document',
+  dest: '../../docs',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
