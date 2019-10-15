@@ -3,7 +3,7 @@ export interface IEvents {
 }
 
 export class EventBus {
-  private _events = {}
+  private _events: IEvents = {}
 
   $register (events: IEvents) {
     for (let eventName in events) {

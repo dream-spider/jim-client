@@ -7,7 +7,8 @@ instance.init({
   service_url: 'http://60.173.195.121:9906/jim-router',
   id: '384a692f-ca3e-11e9-a0b0-525400b66b12',
   name: '焦庆轩',
-  clientId: 'fcb45406-1ab4-4050-8372-52c191de4019',
+  client_id: 'fcb45406-1ab4-4050-8372-52c191de4019',
+  heart_beat_rate: 18000,
   log: false,
   on: {
     inited: function (res) {

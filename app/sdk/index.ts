@@ -15,7 +15,7 @@ enum EVENT_NAME {
 }
 
 interface IJimSDKOption {
-  clientId: string,
+  client_id: string,
   socket_url: string
   service_url: string
   id: string
@@ -34,7 +34,7 @@ class JimSDK {
 
   init (option: IJimSDKOption) {
     this._option = {
-      clientId: option.clientId || '',
+      client_id: option.client_id || '',
       socket_url: option.socket_url || '',
       service_url: option.service_url || '',
       id: option.id || '',
@@ -85,7 +85,7 @@ class JimSDK {
       chatMsg: {
         senderId: this.userInfo.userId,
         senderName: this.userInfo.userName,
-        groupId: this._option.clientId
+        groupId: this._option.client_id
       }
     }
     this.socket.send(JSON.stringify(loginMsg))
@@ -111,7 +111,7 @@ class JimSDK {
       chatMsg: {
         senderId: this.userInfo.userId, 
         senderName: this.userInfo.userName, 
-        groupId: this._option.clientId
+        groupId: this._option.client_id
       }
     }
     this.socket.send(JSON.stringify(heartBeatMsg))
