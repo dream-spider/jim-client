@@ -1,5 +1,5 @@
 const path = require('path')
-const utils = require('./utils')
+const utils = require('../utils')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
 const DotEnvWebpackPlugin = require('dotenv-webpack')
