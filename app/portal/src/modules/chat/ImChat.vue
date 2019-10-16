@@ -219,7 +219,6 @@ export default {
           senderId: this.userInfo.userId, senderName: this.userInfo.userName, groupId: this.clientId
         }
       }
-      console.log(JSON.stringify(loginMsg))
       this.socket.send(JSON.stringify(loginMsg))
     },
     onclose () {
@@ -250,6 +249,9 @@ export default {
           setInterval(this.sendHeartBeat, 18000)
           break
         case constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
+          console.log(msg.message)
+          break
+        case 'test':
           console.log(msg.message)
           break
         case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
