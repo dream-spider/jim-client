@@ -1,6 +1,10 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path')
 const utils = require('../utils')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const DotEnvWebpackPlugin = require('dotenv-webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const { envPath } = utils.loadEnv(path.resolve(__dirname))
 
 module.exports = {
   context: utils.resolve('.'),
@@ -71,6 +75,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './app/portal/index.html',
+      inject: true,
+    }),
+    new DotEnvWebpackPlugin({
+      path: envPath,
+    }),
   ]
 }

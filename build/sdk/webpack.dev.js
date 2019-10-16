@@ -1,10 +1,9 @@
-const path = require('path')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base')
 const utils = require('../utils')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const envPath = path.resolve(__dirname, './env/.env.development')
-utils.loadEnv(envPath)
 
 const serviceRequestCtx = process.env.SERVICE_REQUEST_CTX
 const serviceRequestUrl = process.env.SERVICE_REQUEST_URL
@@ -19,18 +18,10 @@ module.exports = portfinder.getPortPromise({
     pathRewrite: {}
   }
   proxy[serviceRequestCtx].pathRewrite[`^${serviceRequestCtx}`] = ''
-  return {
+
+  return merge(baseWebpackConfig, {
     context: utils.resolve('.'),
     mode: 'development',
-    entry: {
-      sdk: utils.resolve('./app/sdk/main.js'),
-    },
-    resolve: {
-      extensions: ['.ts', '.js', '.json'],
-      alias: {
-        'isdk': utils.resolve('isdk'),
-      }
-    },
     devtool: 'cheap-module-eval-source-map',
     devServer: {
       hot: true,
@@ -55,14 +46,5 @@ module.exports = portfinder.getPortPromise({
         }
       }),
     ],
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          loader: 'ts-loader',
-          options: { appendTsSuffixTo: [/\.vue$/] }
-        }
-      ]
-    },
-  }
+  })
 })

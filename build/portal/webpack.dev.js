@@ -1,15 +1,8 @@
-const path = require('path')
-const utils = require('../utils')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
-const DotEnvWebpackPlugin = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
-// 使用dotenv读取.env文件，植入process.env
-const envPath = path.resolve(__dirname, './env/.env.development')
-utils.loadEnv(envPath)
 
 const serviceRequestCtx = process.env.SERVICE_REQUEST_CTX
 const serviceRequestUrl = process.env.SERVICE_REQUEST_URL
@@ -38,14 +31,6 @@ module.exports = portfinder.getPortPromise({
       proxy: proxy
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: './app/portal/index.html',
-        inject: true,
-      }),
-      new DotEnvWebpackPlugin({
-        path: envPath
-      }),
       new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
           messages: [

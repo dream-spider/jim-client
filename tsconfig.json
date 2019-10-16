@@ -21,8 +21,8 @@
         "dom"
     ],
     "paths": {
-      "isdk/*": ["isdk/*"],
-    },
+      "isdk/*": ["isdk/*"]
+    }
   },
   "include": ["./app/", "./isdk/"]
 }
