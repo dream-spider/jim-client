@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 
 module.exports = {
   resolve: function (dir) {
-    return path.join(__dirname, '../..', dir)
+    return path.join(__dirname, '../', dir)
   },
   loadEnv: function (path) {
     const { parsed, error } = dotenv.config({path})

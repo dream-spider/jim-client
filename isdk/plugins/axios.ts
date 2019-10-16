@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { IResponse } from '../defines/IResponse'
 
 const instance = axios.create({
-  baseURL: process.env.SERVICE_REQUEST_CTX,
+  baseURL: process.env.SERVICE_REQUEST_CTX || '/api',
 })
 
 const onError = () => {
