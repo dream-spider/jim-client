@@ -251,9 +251,6 @@ export default {
         case constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
           console.log(msg.message)
           break
-        case 'test':
-          console.log(msg.message)
-          break
         case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
           let data = msg.data
           if (data.senderId === this.talkingFriend.userId) {

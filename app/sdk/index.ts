@@ -11,7 +11,8 @@ enum EVENT_NAME {
   socket_error = 'socket_error',
   socket_message = 'socket_message',
   socket_close = 'socket_close',
-  fatal_error = 'fatal_error'
+  fatal_error = 'fatal_error',
+  send_hreatbeat = 'send_heartbeat'
 }
 
 interface IJimSDKOption {
@@ -21,7 +22,8 @@ interface IJimSDKOption {
   id: string
   name: string
   log?: boolean,
-  on: IEvents
+  on: IEvents,
+  heart_beat_rate: number
 }
 
 class JimSDK {
@@ -41,6 +43,7 @@ class JimSDK {
       name: option.name || '',
       on: option.on,
       log: option.log === true ? true : false,
+      heart_beat_rate: option.heart_beat_rate || 18
     }
     this.logger = new Logger(this._option.log)
     this.eventBus.$register(this._option.on)
@@ -98,7 +101,23 @@ class JimSDK {
 
   _onSocketMessage (event: MessageEvent) {
     let msg = JSON.parse(event.data)
-    this.eventBus.$emit(EVENT_NAME.socket_message, msg)
+    this.logger.info(EVENT_NAME.socket_message, msg)
+    switch (msg.code) {
+      case constants.IM_MSG_ACTION_TYPE.CONNECTION_ESTABLISH:
+        /**
+         * 发送心跳
+         */
+        this.logger.info(EVENT_NAME.socket_message, this.userInfo)
+        setInterval(this._sendHeartBeat.bind(this), this._option.heart_beat_rate)
+
+        break
+      case constants.IM_MSG_ACTION_TYPE.HEART_BEAT_RESPONSE:
+        this.logger.info(EVENT_NAME.socket_message, msg.message)
+        break
+      case constants.IM_MSG_ACTION_TYPE.CHAT_RESPONSE:
+        this.eventBus.$emit(EVENT_NAME.socket_message, msg.data)
+        break
+    }
   }
 
   _onSocketClose (res: any) {
@@ -109,8 +128,8 @@ class JimSDK {
     let heartBeatMsg = {
       actionType: constants.IM_ACTION_TYPE.HEART_BEAT,
       chatMsg: {
-        senderId: this.userInfo.userId, 
-        senderName: this.userInfo.userName, 
+        senderId: this.userInfo.userId,
+        senderName: this.userInfo.userName,
         groupId: this._option.client_id
       }
     }
@@ -123,7 +142,7 @@ class JimSDK {
     })
   }
 
-  
+
 }
 
 // @ts-ignore

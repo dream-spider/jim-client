@@ -1,11 +1,24 @@
+const path = require('path')
 const utils = require('../utils')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const envPath = path.resolve(__dirname, './env/.env.development')
+utils.loadEnv(envPath)
+
+const serviceRequestCtx = process.env.SERVICE_REQUEST_CTX
+const serviceRequestUrl = process.env.SERVICE_REQUEST_URL
 
 module.exports = portfinder.getPortPromise({
   port: process.env.PORT || 3000,
 }).then((port) => {
+  let proxy = {}
+  proxy[serviceRequestCtx] = {
+    target: serviceRequestUrl,
+    changeOrigin: true,
+    pathRewrite: {}
+  }
+  proxy[serviceRequestCtx].pathRewrite[`^${serviceRequestCtx}`] = ''
   return {
     context: utils.resolve('.'),
     mode: 'development',
@@ -26,15 +39,7 @@ module.exports = portfinder.getPortPromise({
       publicPath: '/',
       clientLogLevel: 'warning',
       quiet: true,
-      proxy: {
-        '/api': {
-          target: 'http://60.173.195.121:9906/jim-router',
-          changeOrigin: true,
-          pathRewrite: {
-            '^/api': '/'
-          }
-        }
-      }
+      proxy: proxy
     },
     plugins: [
       new HtmlWebpackPlugin({
