@@ -3,6 +3,7 @@ const utils = require('../utils')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const DotEnvWebpackPlugin = require('dotenv-webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const { envPath } = utils.loadEnv(path.resolve(__dirname))
 

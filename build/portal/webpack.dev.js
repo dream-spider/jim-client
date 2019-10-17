@@ -1,6 +1,5 @@
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 

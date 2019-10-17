@@ -53,7 +53,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: 'bundle-analyze.html',
-      openAnalyzer: true,
+      openAnalyzer: false,
     })
   ]
 })
