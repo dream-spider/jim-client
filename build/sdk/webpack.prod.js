@@ -7,9 +7,15 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = merge(baseWebpackConfig, {
   context: utils.resolve('.'),
   mode: 'production',
+  entry: {
+    sdk: utils.resolve('./app/sdk/index.ts'),
+  },
   output: {
     path: utils.resolve(`./dist/sdk`),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    library: 'JimSDK',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
   },
   plugins: [
     new CleanWebpackPlugin(),

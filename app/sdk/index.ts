@@ -149,8 +149,7 @@ class JimSDK {
 
 
 }
-
-// @ts-ignore
+//@ts-ignore
 window.JimSDK = JimSDK
 
 export default JimSDK
