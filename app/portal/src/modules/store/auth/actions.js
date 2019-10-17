@@ -1,5 +1,5 @@
-import auth from '@isdk/auth'
-import constants from '@isdk/constants'
+import auth from 'isdk/auth'
+import constants from 'isdk/constants'
 import { toSSO } from '@modules/common/util'
 
 export default {

@@ -10,12 +10,12 @@ const { envPath } = utils.loadEnv(path.resolve(__dirname))
 module.exports = {
   context: utils.resolve('.'),
   entry: {
-    app: utils.resolve('./app/portal/main.js'),
+    app: utils.resolve('./app/portal/index.js'),
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@isdk': utils.resolve('isdk'),
+      'isdk': utils.resolve('isdk'),
       '@': utils.resolve('./app/portal/src'),
       '@modules': utils.resolve('./app/portal/src/modules')
     }

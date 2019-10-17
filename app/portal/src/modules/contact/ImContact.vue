@@ -6,7 +6,7 @@
 
 <script>
 import IndexList from './components/IndexList'
-import { user } from '@isdk'
+import { user } from 'isdk'
 export default {
   name: 'ImContact',
   model: {

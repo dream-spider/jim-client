@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { user, net, constants } from '@isdk'
+import { user, net, constants } from 'isdk'
 import { Notification, Loading } from 'element-ui'
 import ContactList from '@modules/contact/ImContact'
 import ChatPanel from './components/ChatPanel'

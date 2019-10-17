@@ -37,7 +37,7 @@
 <script>
 import ChatContent from './ChatContent'
 import ChatHistory from './ChatHistory'
-import { constants } from '@isdk'
+import { constants } from 'isdk'
 export default {
   name: 'JimMainPanel',
   components: {

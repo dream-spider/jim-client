@@ -4,10 +4,10 @@ const instance = new window.JimSDK()
 
 
 instance.init({
-  service_url: 'http://localhost:8080/jim-router',
+  request_ctx: '/jim-router',
+  client_id: 'DB3DCE35C7C14EEF8F20D24164E95FCD',
   id: 'da974836-c4bf-11e9-8381-525400b66b12',
   name: '焦庆轩',
-  client_id: 'DB3DCE35C7C14EEF8F20D24164E95FCD',
   heart_beat_rate: 18000,
   log: true,
   on: {

@@ -1,4 +1,4 @@
-import { net, utils, constants } from 'isdk'
+import { net, utils, constants, config } from 'isdk'
 import bus, { IEvents, EventBus } from './src/eventBus'
 import { IUser, IImServerInfo } from 'isdk/defines'
 import Logger from './src/logger'
@@ -16,14 +16,13 @@ enum EVENT_NAME {
 }
 
 interface IJimSDKOption {
+  request_ctx: string,
   client_id: string,
-  socket_url: string
-  service_url: string
   id: string
   name: string
   log?: boolean,
-  on: IEvents,
   heart_beat_rate: number
+  on: IEvents,
 }
 
 class JimSDK {
@@ -36,15 +35,21 @@ class JimSDK {
 
   init (option: IJimSDKOption) {
     this._option = {
+      request_ctx: option.request_ctx || '/jim-router',
       client_id: option.client_id || '',
-      socket_url: option.socket_url || '',
-      service_url: option.service_url || '',
       id: option.id || '',
       name: option.name || '',
       on: option.on,
       log: option.log === true ? true : false,
       heart_beat_rate: option.heart_beat_rate || 18
     }
+
+    config.configIsdk({
+      axios: {
+        requestContext: this._option.request_ctx
+      }
+    })
+    
     this.logger = new Logger(this._option.log)
     this.eventBus.$register(this._option.on)
 

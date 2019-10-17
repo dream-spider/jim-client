@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { net, user } from '@isdk'
+import { net, user } from 'isdk'
 import { of, Observable, from } from 'rxjs'
 export default {
   name: 'ImMain',

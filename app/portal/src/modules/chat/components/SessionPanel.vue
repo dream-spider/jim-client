@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { net } from '@isdk'
+import { net } from 'isdk'
 import { avatars } from '@modules/images'
 export default {
   name: 'SessionPanel',

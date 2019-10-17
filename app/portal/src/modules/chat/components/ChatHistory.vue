@@ -13,7 +13,7 @@
 
 <script>
 import ChatContent from './ChatContent'
-import api from '@isdk/api'
+import api from 'isdk/api'
 export default {
   name: 'ChatHistory',
   components: {

@@ -1,26 +1,22 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
+import { getIsdkConfig } from '../config'
 import { IResponse } from '../defines/IResponse'
 
-const instance = axios.create({
-  baseURL: process.env.SERVICE_REQUEST_CTX || '/',
-})
-
-const onError = () => {
-
-}
-
-instance.interceptors.response.use(undefined, onError)
-
+const instance = axios.create()
 
 export default {
   async get<T> (url: string, config?: AxiosRequestConfig) {
-    console.log(url)
-    const response = await instance.get<IResponse<T>>(url, config)
+    const response = await instance.get<IResponse<T>>(url, {
+      ...config,
+      baseURL: getIsdkConfig().axios.requestContext
+    })
     return response.data
   },
   async post<T> (url: string, data?: any, config?: AxiosRequestConfig) {
-    console.log(url)
-    const response = await instance.post<IResponse<T>>(url, data, config)
+    const response = await instance.post<IResponse<T>>(url, data, {
+      ...config,
+      baseURL: getIsdkConfig().axios.requestContext
+    })
     return response.data
   }
 }
