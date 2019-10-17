@@ -142,7 +142,7 @@ export default {
       /**
          * 登录im服务器
          */
-      net.applyImServer(this.$props.userId).then((res) => {
+      net.applyImServer(this.$props.userId,false).then((res) => {
         if (!res) {
           return false
         }

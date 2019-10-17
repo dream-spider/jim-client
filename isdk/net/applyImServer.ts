@@ -4,10 +4,11 @@ interface IApplyImServerResponse {
   user: IUser,
   imServerVO: IImServerInfo
 }
-export const applyImServer = (id: string) => {
+export const applyImServer = (id: string,userAutoRegister: boolean) => {
   return axios.get<IApplyImServerResponse>(`/router/imServer`, {
     params: {
-      userId: id
+      userId: id,
+      userAutoRegister: userAutoRegister
     }
   })
 }

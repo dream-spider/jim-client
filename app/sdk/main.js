@@ -4,12 +4,13 @@ const instance = new window.JimSDK()
 
 
 instance.init({
-  request_ctx: '/jim-router',
+  request_ctx: '/',
   client_id: 'DB3DCE35C7C14EEF8F20D24164E95FCD',
-  id: 'da974836-c4bf-11e9-8381-525400b66b12',
+  id: 'da974836-c4bf-11e9-8381-525400b66b1d',
   name: '焦庆轩',
   heart_beat_rate: 18000,
   log: true,
+  user_auto_register: true,
   on: {
     inited: function (res) {
       console.log('after init')

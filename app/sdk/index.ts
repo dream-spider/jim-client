@@ -23,6 +23,7 @@ interface IJimSDKOption {
   log?: boolean,
   heart_beat_rate: number
   on: IEvents,
+  user_auto_register: boolean
 }
 
 class JimSDK {
@@ -41,7 +42,8 @@ class JimSDK {
       name: option.name || '',
       on: option.on,
       log: option.log === true ? true : false,
-      heart_beat_rate: option.heart_beat_rate || 18
+      heart_beat_rate: option.heart_beat_rate || 18,
+      user_auto_register: option.user_auto_register || false
     }
 
     config.configIsdk({
@@ -49,7 +51,7 @@ class JimSDK {
         requestContext: this._option.request_ctx
       }
     })
-    
+
     this.logger = new Logger(this._option.log)
     this.eventBus.$register(this._option.on)
 
@@ -59,8 +61,8 @@ class JimSDK {
   }
 
   async applyImServer () {
-    const [err, res] = await utils.catchedAsync(net.applyImServer(this._option.id))
-    if (err) {
+    const [err, res] = await utils.catchedAsync(net.applyImServer(this._option.id,this._option.user_auto_register))
+    if (err||res.code!=='200') {
       this.logger.error(EVENT_NAME.apply_failed, err)
       this.eventBus.$emit(EVENT_NAME.apply_failed, err)
     } else {
