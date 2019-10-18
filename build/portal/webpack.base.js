@@ -10,14 +10,14 @@ const { envPath } = utils.loadEnv(path.resolve(__dirname))
 module.exports = {
   context: utils.resolve('.'),
   entry: {
-    app: utils.resolve('./app/portal/index.js'),
+    portal: utils.resolve('./packages/portal/index.js'),
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      'isdk': utils.resolve('isdk'),
-      '@': utils.resolve('./app/portal/src'),
-      '@modules': utils.resolve('./app/portal/src/modules')
+      'isdk': utils.resolve('./packages/isdk'),
+      '@': utils.resolve('./packages/portal/src'),
+      '@modules': utils.resolve('./packages/portal/src/modules')
     }
   },
   module: {
@@ -79,7 +79,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './app/portal/index.html',
+      template: './packages/portal/index.html',
       inject: true,
     }),
     new DotEnvWebpackPlugin({

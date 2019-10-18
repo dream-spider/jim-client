@@ -1,0 +1,24 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Hao Peng <phshy0607@outlook.com>",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.2.1",
+    "dayjs": "^1.8.16",
+    "element-ui": "^2.12.0",
+    "lodash": "^4.17.15",
+    "regenerator-runtime": "^0.13.3",
+    "rxjs": "^6.5.3",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.1",
+    "isdk": "1.0.0"
+  }
+}
