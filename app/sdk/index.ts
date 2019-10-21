@@ -61,7 +61,7 @@ class JimSDK {
   }
 
   async applyImServer () {
-    const [err, res] = await utils.catchedAsync(net.applyImServer(this._option.id,this._option.user_auto_register))
+    const [err, res] = await utils.catchedAsync(net.applyImServer(this._option.id, this._option.user_auto_register))
     if (err||res.code!=='200') {
       this.logger.error(EVENT_NAME.apply_failed, err)
       this.eventBus.$emit(EVENT_NAME.apply_failed, err)
